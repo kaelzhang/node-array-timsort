@@ -1,37 +1,31 @@
 {
-  "name": "timsort",
-  "version": "0.3.0",
-  "author": {
-    "name": "Marco Ziccardi",
-    "url": "http://mziccard.me/"
-  },
+  "name": "timsort-result",
+  "version": "1.0.0",
+  "files": [
+    "src"
+  ],
   "description": "TimSort: Fast Sorting for Node.js",
-  "homepage": "https://github.com/mziccard/node-timsort",
-  "main": "index.js",
-  "directories": {
-    "test": "./test",
-    "benchmark": "./benchmark"
-  },
+  "homepage": "https://github.com/kaelzhang/node-timsort-result",
+  "main": "./src",
   "dependencies": {},
   "devDependencies": {
+    "@ostai/eslint-config": "^3.5.0",
+    "ava": "^3.12.1",
+    "codecov": "^3.7.2",
+    "eslint": "^7.9.0",
+    "eslint-plugin-import": "^2.22.0",
     "assert": "~1.3.0",
-    "babel-eslint": "^4.0.5",
-    "eslint": "^6.6.0",
-    "grunt": "^0.4.5",
-    "grunt-babel": "^5.0.1",
-    "grunt-banner": "^0.5.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-uglify": "^0.9.1",
     "mocha": "~2.2.5"
   },
   "scripts": {
     "test": "mocha --timeout 5000",
-    "lint": "eslint Gruntfile.js src/ test/ benchmark/index.js",
-    "benchmark": "node benchmark/index.js"
+    "benchmark": "node benchmark/index.js",
+    "lint": "eslint .",
+    "fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mziccard/node-timsort.git"
+    "url": "https://github.com/kaelzhang/node-timsort-result.git"
   },
   "keywords": [
     "sort",
@@ -43,6 +37,6 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mziccard/node-timsort/issues"
+    "url": "https://github.com/kaelzhang/node-timsort-result/issues"
   }
 }

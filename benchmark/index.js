@@ -1,91 +1,86 @@
-'use strict';
+const TimSort = require('../index.js')
+const ArrayGenerator = require('../test/array-generator.js')
 
-var TimSort = require('../index.js');
-var ArrayGenerator = require('../test/array-generator.js');
-
-function numberCompare(a,b) {
-    return a-b;
+function numberCompare (a, b) {
+  return a - b
 }
 
-var lengths = [10, 100, 1000, 10000];
+const lengths = [10, 100, 1000, 10000]
 
-function repetitionsFromLength(n) {
-  return parseInt(12000000 / (n * (Math.log(n) / Math.LN10)));
+function repetitionsFromLength (n) {
+  return parseInt(12000000 / (n * (Math.log(n) / Math.LN10)))
 }
 
-var PrettyPrinter = function() {
-  this.str = '';
-};
+const PrettyPrinter = function () {
+  this.str = ''
+}
 
-PrettyPrinter.prototype.addAt = function(value, at) {
+PrettyPrinter.prototype.addAt = function (value, at) {
   while (at > this.str.length) {
-    this.str += ' ';
+    this.str += ' '
   }
-  this.str += value;
-};
+  this.str += value
+}
 
-PrettyPrinter.prototype.toString = function() {
-  return this.str;
-};
+PrettyPrinter.prototype.toString = function () {
+  return this.str
+}
 
-var defaultResults = {};
-var timsortResults = {};
+const defaultResults = {}
+const timsortResults = {}
 
-var printer = new PrettyPrinter();
-printer.addAt('ArrayType', 0);
-printer.addAt('Length', 30);
-printer.addAt('TimSort', 37);
-printer.addAt('array.sort', 47);
-printer.addAt('Speedup', 59);
-console.log(printer.toString());
+let printer = new PrettyPrinter()
+printer.addAt('ArrayType', 0)
+printer.addAt('Length', 30)
+printer.addAt('TimSort', 37)
+printer.addAt('array.sort', 47)
+printer.addAt('Speedup', 59)
+console.log(printer.toString())
 
-for (var generatorName in ArrayGenerator) {
-  if(ArrayGenerator.hasOwnProperty(generatorName)) {
-    var generator = ArrayGenerator[generatorName];
-    defaultResults[generatorName] = {};
-    timsortResults[generatorName] = {};
+for (const generatorName in ArrayGenerator) {
+  if (ArrayGenerator.hasOwnProperty(generatorName)) {
+    const generator = ArrayGenerator[generatorName]
+    defaultResults[generatorName] = {}
+    timsortResults[generatorName] = {}
 
-    for (var j = 0; j < lengths.length; j++) {
+    for (let j = 0; j < lengths.length; j ++) {
+      const length = lengths[j]
 
-      var length = lengths[j];
+      let defaultTime = 0
+      let timsortTime = 0
+      const repetitions = repetitionsFromLength(length)
 
-      var defaultTime = 0;
-      var timsortTime = 0;
-      var repetitions = repetitionsFromLength(length);
+      for (let i = 0; i < repetitions; i ++) {
+        const arr1 = generator(length)
+        const arr2 = arr1.slice()
 
-      for (var i = 0; i<repetitions; i++) {
+        let start = process.hrtime()
+        arr1.sort(numberCompare)
+        let stop = process.hrtime()
 
-        var arr1 = generator(length);
-        var arr2 = arr1.slice();
+        let startNano = start[0] * 1000000000 + start[1]
+        let stopNano = stop[0] * 1000000000 + stop[1]
+        defaultTime += stopNano - startNano
 
-        var start = process.hrtime();
-        arr1.sort(numberCompare);
-        var stop = process.hrtime();
+        start = process.hrtime()
+        TimSort.sort(arr2, numberCompare)
+        stop = process.hrtime()
 
-        var startNano = start[0] * 1000000000 + start[1];
-        var stopNano = stop[0] * 1000000000 + stop[1];
-        defaultTime += stopNano - startNano;
-
-        start = process.hrtime();
-        TimSort.sort(arr2, numberCompare);
-        stop = process.hrtime();
-
-        startNano = start[0] * 1000000000 + start[1];
-        stopNano = stop[0] * 1000000000 + stop[1];
-        timsortTime += stopNano - startNano;
-
+        startNano = start[0] * 1000000000 + start[1]
+        stopNano = stop[0] * 1000000000 + stop[1]
+        timsortTime += stopNano - startNano
       }
 
-      defaultResults[generatorName][length] = defaultTime/repetitions;
-      timsortResults[generatorName][length] = timsortTime/repetitions;
-      printer = new PrettyPrinter();
-      printer.addAt(generatorName, 0);
-      printer.addAt(length, 30);
-      printer.addAt(parseInt(timsortResults[generatorName][length]), 37);
-      printer.addAt(parseInt(defaultResults[generatorName][length]), 47);
-      printer.addAt(defaultResults[generatorName][length]/
-        timsortResults[generatorName][length], 59);
-      console.log(printer.toString());
+      defaultResults[generatorName][length] = defaultTime / repetitions
+      timsortResults[generatorName][length] = timsortTime / repetitions
+      printer = new PrettyPrinter()
+      printer.addAt(generatorName, 0)
+      printer.addAt(length, 30)
+      printer.addAt(parseInt(timsortResults[generatorName][length]), 37)
+      printer.addAt(parseInt(defaultResults[generatorName][length]), 47)
+      printer.addAt(defaultResults[generatorName][length]
+        / timsortResults[generatorName][length], 59)
+      console.log(printer.toString())
     }
-  }  
+  }
 }

@@ -897,6 +897,8 @@ class TimSort {
   }
 }
 
+let results
+
 /**
  * Sort an array in the range [lo, hi) using TimSort.
  *
@@ -907,10 +909,14 @@ class TimSort {
  * @param {number} hi - Last element in the range.
  *     comparator.
  */
-export function sort(array, compare, lo, hi) {
+function sort(array, compare, lo, hi) {
   if (!Array.isArray(array)) {
     throw new TypeError('Can only sort arrays');
   }
+
+  results = []
+
+  const {length} = array
 
   /*
    * Handle the case where a comparison function is not provided. We do
@@ -929,14 +935,14 @@ export function sort(array, compare, lo, hi) {
     lo = 0;
   }
   if (!hi) {
-    hi = array.length;
+    hi = length;
   }
 
   let remaining = hi - lo;
 
   // The array is already sorted
   if (remaining < 2) {
-    return;
+    return results
   }
 
   let runLength = 0;
@@ -944,7 +950,7 @@ export function sort(array, compare, lo, hi) {
   if (remaining < DEFAULT_MIN_MERGE) {
     runLength = makeAscendingRun(array, lo, hi, compare);
     binaryInsertionSort(array, lo, hi, lo + runLength, compare);
-    return;
+    return results
   }
 
   let ts = new TimSort(array, compare);
@@ -974,4 +980,8 @@ export function sort(array, compare, lo, hi) {
 
   // Force merging of remaining runs
   ts.forceMergeRuns();
+}
+
+module.exports = {
+  sort
 }
