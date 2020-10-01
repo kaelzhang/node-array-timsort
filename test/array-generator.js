@@ -1,7 +1,11 @@
+const BIG_NUM = 9007199254740992
+const HALF_BIG_NUM = BIG_NUM / 2
+
+
 exports.randomInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
-    arr.push(parseInt(Math.random() * 9007199254740992, 10))
+    arr.push(parseInt(Math.random() * BIG_NUM, 10) - HALF_BIG_NUM)
   }
   return arr
 }

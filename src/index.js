@@ -28,29 +28,25 @@ let results
  * @param {number} x - The integer to estimate the logarithm of.
  * @return {number} - The estimated logarithm of the integer.
  */
-function log10 (x) {
-  if (x < 1e5) {
-    if (x < 1e2) {
-      return x < 1e1 ? 0 : 1
-    }
-
-    if (x < 1e4) {
-      return x < 1e3 ? 2 : 3
-    }
-
-    return 4
-  }
-
-  if (x < 1e7) {
-    return x < 1e6 ? 5 : 6
-  }
-
-  if (x < 1e9) {
-    return x < 1e8 ? 7 : 8
-  }
-
-  return 9
-}
+const log10 = x => x < 1e5
+  ? x < 1e2
+    ? x < 1e1
+      ? 0
+      : 1
+    : x < 1e4
+      ? x < 1e3
+        ? 2
+        : 3
+      : 4
+  : x < 1e7
+    ? x < 1e6
+      ? 5
+      : 6
+    : x < 1e9
+      ? x < 1e8
+        ? 7
+        : 8
+      : 9
 
 /**
  * Default alphabetical comparison of items.
