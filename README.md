@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/kaelzhang/node-array-timsort.svg?branch=master)](https://travis-ci.org/kaelzhang/node-array-timsort)
 [![Coverage](https://codecov.io/gh/kaelzhang/node-array-timsort/branch/master/graph/badge.svg)](https://codecov.io/gh/kaelzhang/node-array-timsort)
 
-# array-timsort: Fast Sorting for Node.js
+# array-timsort
 
 A fork of [`timsort`](https://npmjs.org/package/timsort). And the only difference is that `array-timsort` returns an array which records how the index of items have been sorted, while `timsort` returns `undefined`.
 

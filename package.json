@@ -1,12 +1,12 @@
 {
   "name": "array-timsort",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "description": "Fast JavaScript array sorting by implementing Python's Timsort algorithm",
+  "homepage": "https://github.com/kaelzhang/node-array-timsort",
+  "main": "./src",
   "files": [
     "src"
   ],
-  "description": "TimSort: Fast Sorting for Node.js",
-  "homepage": "https://github.com/kaelzhang/node-array-timsort",
-  "main": "./src",
   "dependencies": {},
   "devDependencies": {
     "@ostai/eslint-config": "^3.5.0",
