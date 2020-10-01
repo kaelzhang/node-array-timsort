@@ -3,7 +3,7 @@
 
 # array-timsort
 
-A fork of [`timsort`](https://npmjs.org/package/timsort). And the only difference is that
+A fork of [`timsort`](https://npmjs.org/package/timsort) with the following differences:
 
 - `array-timsort` returns an array which records how the index of items have been sorted, while `timsort` returns `undefined`. See the example below.
 - improves test coverage
