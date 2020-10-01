@@ -1,4 +1,4 @@
-const TimSort = require('../index.js')
+const TimSort = require('..')
 const ArrayGenerator = require('../test/array-generator.js')
 
 function numberCompare (a, b) {

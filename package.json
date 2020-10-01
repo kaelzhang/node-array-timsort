@@ -18,6 +18,7 @@
     "nyc": "^15.1.0"
   },
   "scripts": {
+    "benchmark": "node benchmark/index.js",
     "test": "npm run test:only",
     "test:only": "NODE_DEBUG=timsort-result nyc ava --timeout=10s --verbose",
     "test:dev": "npm run test:only && npm run report:dev",
