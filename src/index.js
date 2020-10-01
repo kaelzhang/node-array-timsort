@@ -266,7 +266,10 @@ function gallopLeft (value, array, start, length, hint, compare) {
   if (compare(value, array[start + hint]) > 0) {
     maxOffset = length - hint
 
-    while (offset < maxOffset && compare(value, array[start + hint + offset]) > 0) {
+    while (
+      offset < maxOffset
+      && compare(value, array[start + hint + offset]) > 0
+    ) {
       lastOffset = offset
       offset = (offset << 1) + 1
 
@@ -286,7 +289,10 @@ function gallopLeft (value, array, start, length, hint, compare) {
     // value <= array[start + hint]
   } else {
     maxOffset = hint + 1
-    while (offset < maxOffset && compare(value, array[start + hint - offset]) <= 0) {
+    while (
+      offset < maxOffset
+      && compare(value, array[start + hint - offset]) <= 0
+    ) {
       lastOffset = offset
       offset = (offset << 1) + 1
 
@@ -344,7 +350,10 @@ function gallopRight (value, array, start, length, hint, compare) {
   if (compare(value, array[start + hint]) < 0) {
     maxOffset = hint + 1
 
-    while (offset < maxOffset && compare(value, array[start + hint - offset]) < 0) {
+    while (
+      offset < maxOffset
+      && compare(value, array[start + hint - offset]) < 0
+    ) {
       lastOffset = offset
       offset = (offset << 1) + 1
 
@@ -366,7 +375,10 @@ function gallopRight (value, array, start, length, hint, compare) {
   } else {
     maxOffset = length - hint
 
-    while (offset < maxOffset && compare(value, array[start + hint + offset]) >= 0) {
+    while (
+      offset < maxOffset
+      && compare(value, array[start + hint + offset]) >= 0
+    ) {
       lastOffset = offset
       offset = (offset << 1) + 1
 
@@ -456,10 +468,16 @@ class TimSort {
     while (this.stackSize > 1) {
       let n = this.stackSize - 2
 
-      if ((n >= 1
-        && this.runLength[n - 1] <= this.runLength[n] + this.runLength[n + 1])
-        || (n >= 2
-        && this.runLength[n - 2] <= this.runLength[n] + this.runLength[n - 1])) {
+      if (
+        (
+          n >= 1
+          && this.runLength[n - 1] <= this.runLength[n] + this.runLength[n + 1]
+        )
+        || (
+          n >= 2
+          && this.runLength[n - 2] <= this.runLength[n] + this.runLength[n - 1]
+        )
+      ) {
         if (this.runLength[n - 1] < this.runLength[n + 1]) {
           n --
         }
@@ -525,7 +543,14 @@ class TimSort {
      * Find where the last element in the first run goes in run2. Next elements
      * in run2 are already in place
      */
-    length2 = gallopLeft(array[start1 + length1 - 1], array, start2, length2, length2 - 1, compare)
+    length2 = gallopLeft(
+      array[start1 + length1 - 1],
+      array,
+      start2,
+      length2,
+      length2 - 1,
+      compare
+    )
 
     if (length2 === 0) {
       return
@@ -666,7 +691,10 @@ class TimSort {
         }
 
         minGallop --
-      } while (count1 >= DEFAULT_MIN_GALLOPING || count2 >= DEFAULT_MIN_GALLOPING)
+      } while (
+        count1 >= DEFAULT_MIN_GALLOPING
+        || count2 >= DEFAULT_MIN_GALLOPING
+      )
 
       if (exit) {
         break
@@ -786,7 +814,14 @@ class TimSort {
       }
 
       do {
-        count1 = length1 - gallopRight(tmp[cursor2], array, start1, length1, length1 - 1, compare)
+        count1 = length1 - gallopRight(
+          tmp[cursor2],
+          array,
+          start1,
+          length1,
+          length1 - 1,
+          compare
+        )
 
         if (count1 !== 0) {
           dest -= count1
@@ -812,7 +847,14 @@ class TimSort {
           break
         }
 
-        count2 = length2 - gallopLeft(array[cursor1], tmp, 0, length2, length2 - 1, compare)
+        count2 = length2 - gallopLeft(
+          array[cursor1],
+          tmp,
+          0,
+          length2,
+          length2 - 1,
+          compare
+        )
 
         if (count2 !== 0) {
           dest -= count2
@@ -839,7 +881,10 @@ class TimSort {
         }
 
         minGallop --
-      } while (count1 >= DEFAULT_MIN_GALLOPING || count2 >= DEFAULT_MIN_GALLOPING)
+      } while (
+        count1 >= DEFAULT_MIN_GALLOPING
+        || count2 >= DEFAULT_MIN_GALLOPING
+      )
 
       if (exit) {
         break
