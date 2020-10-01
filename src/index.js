@@ -20,6 +20,8 @@ const DEFAULT_TMP_STORAGE_LENGTH = 256
  */
 const POWERS_OF_TEN = [1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9]
 
+let results
+
 /**
  * Estimate the logarithm base 10 of a small integer.
  *
@@ -154,6 +156,7 @@ function makeAscendingRun (array, lo, hi, compare) {
     }
 
     reverseRun(array, lo, runHi)
+    reverseRun(results, lo, runHi)
     // Ascending
   } else {
     while (runHi < hi && compare(array[runHi], array[runHi - 1]) >= 0) {
@@ -198,6 +201,7 @@ function binaryInsertionSort (array, lo, hi, start, compare) {
 
   for (; start < hi; start ++) {
     const pivot = array[start]
+    const pivotIndex = results[start]
 
     // Ranges of the array where pivot belongs
     let left = lo
@@ -227,21 +231,26 @@ function binaryInsertionSort (array, lo, hi, start, compare) {
     switch (n) {
     case 3:
       array[left + 3] = array[left + 2]
+      results[left + 3] = results[left + 2]
       /* falls through */
     case 2:
       array[left + 2] = array[left + 1]
+      results[left + 2] = results[left + 1]
       /* falls through */
     case 1:
       array[left + 1] = array[left]
+      results[left + 1] = results[left]
       break
     default:
       while (n > 0) {
         array[left + n] = array[left + n - 1]
+        results[left + n] = results[left + n - 1]
         n --
       }
     }
 
     array[left] = pivot
+    results[left] = pivotIndex
   }
 }
 
@@ -432,6 +441,7 @@ class TimSort {
       : DEFAULT_TMP_STORAGE_LENGTH
 
     this.tmp = new Array(this.tmpStorageLength)
+    this.tmpIndex = new Array(this.tmpStorageLength)
 
     this.stackLength = length < 120
       ? 5
@@ -584,21 +594,28 @@ class TimSort {
     const {compare} = this
     const {array} = this
     const {tmp} = this
+    const {tmpIndex} = this
     let i = 0
 
     for (i = 0; i < length1; i ++) {
       tmp[i] = array[start1 + i]
+      tmpIndex[i] = start1 + i
     }
 
     let cursor1 = 0
     let cursor2 = start2
     let dest = start1
 
-    array[dest ++] = array[cursor2 ++]
+    array[dest] = array[cursor2]
+    results[dest] = results[cursor2]
+
+    dest ++
+    cursor2 ++
 
     if (-- length2 === 0) {
       for (i = 0; i < length1; i ++) {
         array[dest + i] = tmp[cursor1 + i]
+        results[dest + i] = tmpIndex[cursor1 + i]
       }
       return
     }
@@ -606,8 +623,10 @@ class TimSort {
     if (length1 === 1) {
       for (i = 0; i < length2; i ++) {
         array[dest + i] = array[cursor2 + i]
+        results[dest + i] = results[cursor2 + i]
       }
       array[dest + length2] = tmp[cursor1]
+      results[dest + length2] = tmpIndex[cursor1]
       return
     }
 
@@ -620,7 +639,10 @@ class TimSort {
 
       do {
         if (compare(array[cursor2], tmp[cursor1]) < 0) {
-          array[dest ++] = array[cursor2 ++]
+          array[dest] = array[cursor2]
+          results[dest] = results[cursor2]
+          dest ++
+          cursor2 ++
           count2 ++
           count1 = 0
 
@@ -629,7 +651,10 @@ class TimSort {
             break
           }
         } else {
-          array[dest ++] = tmp[cursor1 ++]
+          array[dest] = tmp[cursor1]
+          results[dest] = tmpIndex[cursor1]
+          dest ++
+          cursor1 ++
           count1 ++
           count2 = 0
           if (-- length1 === 1) {
@@ -649,6 +674,7 @@ class TimSort {
         if (count1 !== 0) {
           for (i = 0; i < count1; i ++) {
             array[dest + i] = tmp[cursor1 + i]
+            results[dest + i] = tmpIndex[cursor1 + i]
           }
 
           dest += count1
@@ -660,7 +686,11 @@ class TimSort {
           }
         }
 
-        array[dest ++] = array[cursor2 ++]
+        array[dest] = array[cursor2]
+        results[dest] = results[cursor2]
+
+        dest ++
+        cursor2 ++
 
         if (-- length2 === 0) {
           exit = true
@@ -672,6 +702,7 @@ class TimSort {
         if (count2 !== 0) {
           for (i = 0; i < count2; i ++) {
             array[dest + i] = array[cursor2 + i]
+            results[dest + i] = results[cursor2 + i]
           }
 
           dest += count2
@@ -683,7 +714,10 @@ class TimSort {
             break
           }
         }
-        array[dest ++] = tmp[cursor1 ++]
+        array[dest] = tmp[cursor1]
+        results[dest] = tmpIndex[cursor1]
+        dest ++
+        cursor1 ++
 
         if (-- length1 === 1) {
           exit = true
@@ -716,13 +750,16 @@ class TimSort {
     if (length1 === 1) {
       for (i = 0; i < length2; i ++) {
         array[dest + i] = array[cursor2 + i]
+        results[dest + i] = results[cursor2 + i]
       }
       array[dest + length2] = tmp[cursor1]
+      results[dest + length2] = tmpIndex[cursor1]
     } else if (length1 === 0) {
       throw new Error('mergeLow preconditions were not respected')
     } else {
       for (i = 0; i < length1; i ++) {
         array[dest + i] = tmp[cursor1 + i]
+        results[dest + i] = tmpIndex[cursor1 + i]
       }
     }
   }
@@ -744,10 +781,12 @@ class TimSort {
     const {compare} = this
     const {array} = this
     const {tmp} = this
+    const {tmpIndex} = this
     let i = 0
 
     for (i = 0; i < length2; i ++) {
       tmp[i] = array[start2 + i]
+      tmpIndex[i] = start2 + i
     }
 
     let cursor1 = start1 + length1 - 1
@@ -756,7 +795,10 @@ class TimSort {
     let customCursor = 0
     let customDest = 0
 
-    array[dest --] = array[cursor1 --]
+    array[dest] = array[cursor1]
+
+    dest --
+    cursor1 --
 
     if (-- length1 === 0) {
       customCursor = dest - (length2 - 1)
@@ -791,7 +833,9 @@ class TimSort {
 
       do {
         if (compare(tmp[cursor2], array[cursor1]) < 0) {
-          array[dest --] = array[cursor1 --]
+          array[dest] = array[cursor1]
+          dest --
+          cursor1 --
           count1 ++
           count2 = 0
           if (-- length1 === 0) {
@@ -799,7 +843,9 @@ class TimSort {
             break
           }
         } else {
-          array[dest --] = tmp[cursor2 --]
+          array[dest] = tmp[cursor2]
+          dest --
+          cursor2 --
           count2 ++
           count1 = 0
           if (-- length2 === 1) {
@@ -840,7 +886,9 @@ class TimSort {
           }
         }
 
-        array[dest --] = tmp[cursor2 --]
+        array[dest] = tmp[cursor2]
+        dest --
+        cursor2 --
 
         if (-- length2 === 1) {
           exit = true
@@ -873,7 +921,9 @@ class TimSort {
           }
         }
 
-        array[dest --] = array[cursor1 --]
+        array[dest] = array[cursor1]
+        dest --
+        cursor1 --
 
         if (-- length1 === 0) {
           exit = true
@@ -924,8 +974,6 @@ class TimSort {
     }
   }
 }
-
-let results
 
 /**
  * Sort an array in the range [lo, hi) using TimSort.
@@ -1012,6 +1060,8 @@ function sort (array, compare, lo, hi) {
 
   // Force merging of remaining runs
   ts.forceMergeRuns()
+
+  return results
 }
 
 module.exports = {
