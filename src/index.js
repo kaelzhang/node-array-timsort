@@ -796,6 +796,7 @@ class TimSort {
     let customDest = 0
 
     array[dest] = array[cursor1]
+    results[dest] = results[cursor1]
 
     dest --
     cursor1 --
@@ -805,6 +806,7 @@ class TimSort {
 
       for (i = 0; i < length2; i ++) {
         array[customCursor + i] = tmp[i]
+        results[customCursor + i] = tmpIndex[i]
       }
 
       return
@@ -818,9 +820,11 @@ class TimSort {
 
       for (i = length1 - 1; i >= 0; i --) {
         array[customDest + i] = array[customCursor + i]
+        results[customDest + i] = results[customCursor + i]
       }
 
       array[dest] = tmp[cursor2]
+      results[dest] = tmpIndex[cursor2]
       return
     }
 
@@ -834,6 +838,7 @@ class TimSort {
       do {
         if (compare(tmp[cursor2], array[cursor1]) < 0) {
           array[dest] = array[cursor1]
+          results[dest] = results[cursor1]
           dest --
           cursor1 --
           count1 ++
@@ -844,6 +849,7 @@ class TimSort {
           }
         } else {
           array[dest] = tmp[cursor2]
+          results[dest] = tmpIndex[cursor2]
           dest --
           cursor2 --
           count2 ++
@@ -878,6 +884,7 @@ class TimSort {
 
           for (i = count1 - 1; i >= 0; i --) {
             array[customDest + i] = array[customCursor + i]
+            results[customDest + i] = results[customCursor + i]
           }
 
           if (length1 === 0) {
@@ -887,6 +894,7 @@ class TimSort {
         }
 
         array[dest] = tmp[cursor2]
+        results[dest] = tmpIndex[cursor2]
         dest --
         cursor2 --
 
@@ -913,6 +921,7 @@ class TimSort {
 
           for (i = 0; i < count2; i ++) {
             array[customDest + i] = tmp[customCursor + i]
+            results[customDest + i] = tmpIndex[customCursor + i]
           }
 
           if (length2 <= 1) {
@@ -922,6 +931,7 @@ class TimSort {
         }
 
         array[dest] = array[cursor1]
+        results[dest] = results[cursor1]
         dest --
         cursor1 --
 
@@ -961,15 +971,18 @@ class TimSort {
 
       for (i = length1 - 1; i >= 0; i --) {
         array[customDest + i] = array[customCursor + i]
+        results[customDest + i] = results[customCursor + i]
       }
 
       array[dest] = tmp[cursor2]
+      results[dest] = tmpIndex[cursor2]
     } else if (length2 === 0) {
       throw new Error('mergeHigh preconditions were not respected')
     } else {
       customCursor = dest - (length2 - 1)
       for (i = 0; i < length2; i ++) {
         array[customCursor + i] = tmp[i]
+        results[customCursor + i] = tmpIndex[i]
       }
     }
   }
