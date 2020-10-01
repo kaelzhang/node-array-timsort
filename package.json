@@ -10,12 +10,13 @@
   "dependencies": {},
   "devDependencies": {
     "@ostai/eslint-config": "^3.5.0",
-    "ava": "^3.12.1",
+    "assert": "^2.0.0",
+    "ava": "^3.13.0",
     "codecov": "^3.7.2",
-    "eslint": "^7.9.0",
-    "eslint-plugin-import": "^2.22.0",
-    "assert": "~1.3.0",
-    "mocha": "~2.2.5"
+    "eslint": "^7.10.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^8.0.0",
+    "mocha": "^8.1.3"
   },
   "scripts": {
     "test": "mocha --timeout 5000",

@@ -1,14 +1,14 @@
 const ArrayGenerator = {}
 
-ArrayGenerator.randomInt = function (n) {
+ArrayGenerator.randomInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
-    arr.push(parseInt(Math.random() * 9007199254740992))
+    arr.push(parseInt(Math.random() * 9007199254740992, 10))
   }
   return arr
 }
 
-ArrayGenerator.descendingInt = function (n) {
+ArrayGenerator.descendingInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(n - i)
@@ -16,7 +16,7 @@ ArrayGenerator.descendingInt = function (n) {
   return arr
 }
 
-ArrayGenerator.ascendingInt = function (n) {
+ArrayGenerator.ascendingInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(i)
@@ -24,14 +24,15 @@ ArrayGenerator.ascendingInt = function (n) {
   return arr
 }
 
-ArrayGenerator.ascending3RandomExchangesInt = function (n) {
+ArrayGenerator.ascending3RandomExchangesInt = n => {
   const arr = []
-  for (var i = 0; i < n; i ++) {
+  let i
+  for (i = 0; i < n; i ++) {
     arr.push(i)
   }
   for (i = 0; i < 1; i ++) {
-    const first = parseInt(Math.random() * n)
-    const second = parseInt(Math.random() * n)
+    const first = parseInt(Math.random() * n, 10)
+    const second = parseInt(Math.random() * n, 10)
     const tmp = arr[first]
     arr[first] = arr[second]
     arr[second] = tmp
@@ -39,19 +40,20 @@ ArrayGenerator.ascending3RandomExchangesInt = function (n) {
   return arr
 }
 
-ArrayGenerator.ascending10RandomEndInt = function (n) {
+ArrayGenerator.ascending10RandomEndInt = n => {
   const arr = []
-  for (var i = 0; i < n; i ++) {
+  let i
+  for (i = 0; i < n; i ++) {
     arr.push(i)
   }
   const endStart = n - 10
   for (i = endStart; i < n; i ++) {
-    arr[i] = parseInt(Math.random() * n)
+    arr[i] = parseInt(Math.random() * n, 10)
   }
   return arr
 }
 
-ArrayGenerator.allEqualInt = function (n) {
+ArrayGenerator.allEqualInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(42)
@@ -59,18 +61,20 @@ ArrayGenerator.allEqualInt = function (n) {
   return arr
 }
 
-ArrayGenerator.manyDuplicateInt = function (n) {
+ArrayGenerator.manyDuplicateInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
-    arr.push(parseInt(Math.random() * (n / 2 * (Math.log(n) / Math.LN10))))
+    arr.push(
+      parseInt(Math.random() * (n / 2 * (Math.log(n) / Math.LN10)), 10)
+    )
   }
   return arr
 }
 
-ArrayGenerator.someDuplicateInt = function (n) {
+ArrayGenerator.someDuplicateInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
-    arr.push(parseInt(Math.random() * n))
+    arr.push(parseInt(Math.random() * n, 10))
   }
   return arr
 }
