@@ -6,8 +6,5 @@ module.exports = {
       'never'
     ],
     'no-constant-condition': 0
-  },
-  env: {
-    mocha: true
   }
 }
