@@ -1,6 +1,6 @@
 {
   "name": "array-timsort",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fast JavaScript array sorting by implementing Python's Timsort algorithm",
   "homepage": "https://github.com/kaelzhang/node-array-timsort",
   "main": "./src",
