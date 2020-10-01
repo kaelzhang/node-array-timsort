@@ -1,6 +1,4 @@
-const ArrayGenerator = {}
-
-ArrayGenerator.randomInt = n => {
+exports.randomInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(parseInt(Math.random() * 9007199254740992, 10))
@@ -8,7 +6,7 @@ ArrayGenerator.randomInt = n => {
   return arr
 }
 
-ArrayGenerator.descendingInt = n => {
+exports.descendingInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(n - i)
@@ -16,7 +14,7 @@ ArrayGenerator.descendingInt = n => {
   return arr
 }
 
-ArrayGenerator.ascendingInt = n => {
+exports.ascendingInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(i)
@@ -24,7 +22,7 @@ ArrayGenerator.ascendingInt = n => {
   return arr
 }
 
-ArrayGenerator.ascending3RandomExchangesInt = n => {
+exports.ascending3RandomExchangesInt = n => {
   const arr = []
   let i
   for (i = 0; i < n; i ++) {
@@ -40,7 +38,7 @@ ArrayGenerator.ascending3RandomExchangesInt = n => {
   return arr
 }
 
-ArrayGenerator.ascending10RandomEndInt = n => {
+exports.ascending10RandomEndInt = n => {
   const arr = []
   let i
   for (i = 0; i < n; i ++) {
@@ -53,7 +51,7 @@ ArrayGenerator.ascending10RandomEndInt = n => {
   return arr
 }
 
-ArrayGenerator.allEqualInt = n => {
+exports.allEqualInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(42)
@@ -61,7 +59,7 @@ ArrayGenerator.allEqualInt = n => {
   return arr
 }
 
-ArrayGenerator.manyDuplicateInt = n => {
+exports.manyDuplicateInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(
@@ -71,12 +69,10 @@ ArrayGenerator.manyDuplicateInt = n => {
   return arr
 }
 
-ArrayGenerator.someDuplicateInt = n => {
+exports.someDuplicateInt = n => {
   const arr = []
   for (let i = 0; i < n; i ++) {
     arr.push(parseInt(Math.random() * n, 10))
   }
   return arr
 }
-
-module.exports = ArrayGenerator

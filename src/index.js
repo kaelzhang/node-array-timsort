@@ -599,7 +599,7 @@ class TimSort {
 
     for (i = 0; i < length1; i ++) {
       tmp[i] = array[start1 + i]
-      tmpIndex[i] = start1 + i
+      tmpIndex[i] = results[start1 + i]
     }
 
     let cursor1 = 0
@@ -786,7 +786,7 @@ class TimSort {
 
     for (i = 0; i < length2; i ++) {
       tmp[i] = array[start2 + i]
-      tmpIndex[i] = start2 + i
+      tmpIndex[i] = results[start2 + i]
     }
 
     let cursor1 = start1 + length1 - 1
@@ -1000,7 +1000,9 @@ class TimSort {
  */
 function sort (array, compare, lo, hi) {
   if (!Array.isArray(array)) {
-    throw new TypeError('Can only sort arrays')
+    throw new TypeError(
+      `The "array" argument must be of type Array. Received ${array}`
+    )
   }
 
   results = []
