@@ -946,6 +946,12 @@ function sort (array, compare, lo, hi) {
 
   const {length} = array
 
+  let i = 0
+
+  while (i < length) {
+    results[i] = i ++
+  }
+
   /*
    * Handle the case where a comparison function is not provided. We do
    * lexicographic sorting
