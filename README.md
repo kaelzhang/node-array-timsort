@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/kaelzhang/node-timsort-result.svg?branch=master)](https://travis-ci.org/kaelzhang/node-timsort-result)
+[![Coverage](https://codecov.io/gh/kaelzhang/node-timsort-result/branch/master/graph/badge.svg)](https://codecov.io/gh/kaelzhang/node-timsort-result)
 
 # timsort-result: Fast Sorting for Node.js
 
