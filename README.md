@@ -11,6 +11,8 @@ const {sort} = require('timsort-result')
 const array = [3, 2, 1, 5]
 
 sort(array)  // returns [2, 1, 0, 4]
+
+console.log(array)  // [1, 2, 3, 5]
 ```
 
 ****

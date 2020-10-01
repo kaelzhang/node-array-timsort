@@ -997,7 +997,7 @@ class TimSort {
 function sort (array, compare, lo, hi) {
   if (!Array.isArray(array)) {
     throw new TypeError(
-      `The "array" argument must be of type Array. Received ${array}`
+      `The "array" argument must be an array. Received ${array}`
     )
   }
 

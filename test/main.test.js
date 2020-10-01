@@ -25,7 +25,7 @@ const LENGTHS = [
   // 100000000
 ]
 const REPEATS = 10
-const COMPARERS = [numberCompare, undefined]
+const COMPARERS = [numberCompare, undefined, 0]
 const TEST_SUBRANGE = [true, false]
 
 const CASES = [
@@ -65,14 +65,20 @@ const CASES = [
 
 
 const run = (t, array, ...args) => {
-  const range = args.slice(1)
+  const sortArgs = typeof args[0] === 'function'
+    ? [args[0]]
+    : []
+
+  const range = args.length > 1
+    ? args.slice(- 2)
+    : []
 
   const arrayForSort = array.slice(...range)
   const arrayForTimeResultSort = array.slice()
 
   const result = sort(array, ...args)
 
-  arrayForSort.sort(...args)
+  arrayForSort.sort(...sortArgs)
   sortByResult(arrayForTimeResultSort, result)
 
   if (range.length === 0) {
@@ -104,7 +110,9 @@ CASES.forEach(({
       TEST_SUBRANGE.forEach(subrange => {
         const descComparer = comparer
           ? 'with comparer'
-          : 'lexicographically'
+          : comparer === 0
+            ? 'lexicographically (arg reload)'
+            : 'lexicographically'
 
         const descSubrange = subrange
           ? 'sub range'
@@ -119,7 +127,9 @@ CASES.forEach(({
           t => {
             for (let i = 0; i < repeats; i ++) {
               const array = ArrayGenerator[inputGeneratorMethod](length)
-              const args = [comparer]
+              const args = comparer === 0
+                ? []
+                : [comparer]
 
               if (subrange) {
                 const lo = parseInt(length / 4, 10)
