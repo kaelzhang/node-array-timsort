@@ -1,11 +1,11 @@
 {
-  "name": "timsort-result",
-  "version": "0.0.1",
+  "name": "array-timsort",
+  "version": "1.0.0",
   "files": [
     "src"
   ],
   "description": "TimSort: Fast Sorting for Node.js",
-  "homepage": "https://github.com/kaelzhang/node-timsort-result",
+  "homepage": "https://github.com/kaelzhang/node-array-timsort",
   "main": "./src",
   "dependencies": {},
   "devDependencies": {
@@ -20,7 +20,7 @@
   "scripts": {
     "benchmark": "node benchmark/index.js",
     "test": "npm run test:only",
-    "test:only": "NODE_DEBUG=timsort-result nyc ava --timeout=10s --verbose",
+    "test:only": "NODE_DEBUG=array-timsort nyc ava --timeout=10s --verbose",
     "test:dev": "npm run test:only && npm run report:dev",
     "lint": "eslint .",
     "fix": "eslint . --fix",
@@ -36,9 +36,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaelzhang/node-timsort-result.git"
+    "url": "https://github.com/kaelzhang/node-array-timsort.git"
   },
   "keywords": [
+    "fast sort",
+    "array soft",
     "sort",
     "compare",
     "TimSort",
@@ -48,6 +50,6 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kaelzhang/node-timsort-result/issues"
+    "url": "https://github.com/kaelzhang/node-array-timsort/issues"
   }
 }

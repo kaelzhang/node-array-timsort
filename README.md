@@ -1,12 +1,12 @@
-[![Build Status](https://travis-ci.org/kaelzhang/node-timsort-result.svg?branch=master)](https://travis-ci.org/kaelzhang/node-timsort-result)
-[![Coverage](https://codecov.io/gh/kaelzhang/node-timsort-result/branch/master/graph/badge.svg)](https://codecov.io/gh/kaelzhang/node-timsort-result)
+[![Build Status](https://travis-ci.org/kaelzhang/node-array-timsort.svg?branch=master)](https://travis-ci.org/kaelzhang/node-array-timsort)
+[![Coverage](https://codecov.io/gh/kaelzhang/node-array-timsort/branch/master/graph/badge.svg)](https://codecov.io/gh/kaelzhang/node-array-timsort)
 
-# timsort-result: Fast Sorting for Node.js
+# array-timsort: Fast Sorting for Node.js
 
-A fork of [`timsort`](https://npmjs.org/package/timsort). And the only difference is that `timsort-result` returns an array which records how the index of items have been sorted, while `timsort` returns `undefined`.
+A fork of [`timsort`](https://npmjs.org/package/timsort). And the only difference is that `array-timsort` returns an array which records how the index of items have been sorted, while `timsort` returns `undefined`.
 
 ```js
-const {sort} = require('timsort-result')
+const {sort} = require('array-timsort')
 
 const array = [3, 2, 1, 5]
 
@@ -35,20 +35,20 @@ TimSort has been also adopted in Java starting from version 7.
 Install the package with npm:
 
 ```sh
-npm i timsort-result
+npm i array-timsort
 ```
 
 And use it:
 
 ```js
-const {sort} = require('timsort-result')
+const {sort} = require('array-timsort')
 
 const arr = [...]
 
 sort(arr)
 ```
 
-As `array.sort()` by default the `timsort-result` module sorts according to
+As `array.sort()` by default the `array-timsort` module sorts according to
 lexicographical order.
 
 You can also provide your own compare function (to sort any object) as:
@@ -72,7 +72,7 @@ sort(arr, numberCompare, 5, 10)
 
 ## Performance
 
-A benchmark is provided in `benchmark/index.js`. It compares the `timsort-result` module against
+A benchmark is provided in `benchmark/index.js`. It compares the `array-timsort` module against
 the default `array.sort` method in the numerical sorting of different types of integer array
 (as described [here](http://svn.python.org/projects/python/trunk/Objects/listsort.txt)):
 
@@ -205,7 +205,7 @@ results are very similar), obtaining the following values:
 `TimSort.sort` **is faster** than `array.sort` on almost of the tested array types.
 In general, the more ordered the array is the better `TimSort.sort` performs with respect to `array.sort` (up to 243 times faster on already sorted arrays).
 And also, in general, the bigger the array the more we benefit from using
-the `timsort-result` module.
+the `array-timsort` module.
 
 These data strongly depend on Node.js version and the machine on which the benchmark is run. I strongly encourage you to run the benchmark on your own setup with:
 ```
@@ -215,7 +215,7 @@ Please also notice that:
 
 -  This benchmark is far from exhaustive. Several cases are not considered
 and the results must be taken as partial
--  *inlining* is surely playing an active role in `timsort-result` module's good performance
+-  *inlining* is surely playing an active role in `array-timsort` module's good performance
 -  A more accurate comparison of the algorithms would require implementing `array.sort` in pure javascript
 and counting element comparisons
 
@@ -241,7 +241,7 @@ Consider the following array of items with an height and a weight.
 ]
 ```
 Items are already sorted by `weight`. Sorting the array
-according to the item's `height` with the `timsort-result` module
+according to the item's `height` with the `array-timsort` module
 results in the following array:
 ```javascript
 [
